@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import { Button, Container, CssBaseline, Divider, List, ListItem, ListItemIcon, ListItemText, makeStyles, TextField, Typography } from '@material-ui/core';
+import { Button, Container, CssBaseline, List, ListItem, makeStyles, TextField, Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -15,7 +15,6 @@ function ListShow(props) {
     var [person,setPerson]=useState(JSON.parse(props.location.state));
      var [todo,setTodo]=useState(person.list);
      const [vra,setVra]=useState(false);
-     const [login,setlogin]=useState("signin");
      const  Check= (e) => {
         startPost(e);
     };
@@ -41,7 +40,6 @@ function ListShow(props) {
     fetch("http://hrishis-todo-list-api.herokuapp.com/user/"+person.id, requestOptions)
     .then(response => response.text())
     .then(result => {
-        console.log(result);
         props.history.push("/user",result);})
     .catch(error => console.log('error', error));
     }
@@ -82,7 +80,6 @@ function ListShow(props) {
                         setVra(!vra);
                         arr[index]=e.target.value;
                         setTodo(arr);
-                        console.log(arr);
                     }}
                     autoFocus
                     />

@@ -52,9 +52,7 @@ const disp=()=>
 {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    console.log("hello");
-var raw = JSON.stringify({"firstName":firstName,"lastName":lastName,"mailId":email,"userName":userName,"password":password,"list":["hey","hi"]});
-console.log("hey");
+var raw = JSON.stringify({"firstName":firstName,"lastName":lastName,"mailId":email,"userName":userName,"password":password,"list":["Enter your first task here"]});
 var requestOptions = {
   method: 'POST',
   headers: myHeaders,
@@ -64,7 +62,6 @@ var requestOptions = {
 fetch("http://hrishis-todo-list-api.herokuapp.com/user/new", requestOptions)
   .then(response => response.text())
   .then(result => {
-  console.log(result);
   props.history.push("/user",result);})
   .catch(error => console.log('error', error));
 }
@@ -89,7 +86,6 @@ fetch("http://hrishis-todo-list-api.herokuapp.com/user/new", requestOptions)
                 id="firstName"
                 label="First Name"
                 value={firstName}
-                defaultValue="Hey"
                 onChange={(e)=>setFirstName(e.target.value)}
                 autoFocus
               />

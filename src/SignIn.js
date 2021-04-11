@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn(props) {
   const classes = useStyles();
-  console.log(props.person);
   const [userName,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [person,setPerson]=useState("");
@@ -62,7 +61,6 @@ redirect: 'follow'
 fetch("http://hrishis-todo-list-api.herokuapp.com/user/check", requestOptions)
 .then(response => response.text())
 .then(result => {
-console.log(result);
 props.history.push("/user",result);})
 .catch(error => console.log('error', error));
 }
