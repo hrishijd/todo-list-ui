@@ -36,28 +36,36 @@ export default function SignIn(props) {
   const [userName,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [person,setPerson]=useState("");
-  const Check=e=>{
-    e.preventDefault();
-    ftch();
-  };
-  const ftch=()=>{
-    var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-
-var raw = JSON.stringify({"userName":userName,"password":password});
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
+  const  Check= (e) => {
+    startPost(e);
+};
+const  startPost= (e) => {
+  e.preventDefault();
+  disp();  
 };
 
+
+
+const disp=()=>
+{
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  console.log("hello");
+var raw = JSON.stringify({"userName":userName,"password":password});
+console.log("hey");
+var requestOptions = {
+method: 'POST',
+headers: myHeaders,
+body: raw,
+redirect: 'follow'
+};
 fetch("http://hrishis-todo-list-api.herokuapp.com/user/check", requestOptions)
-  .then(response => response.text())
-  .then(result => setPerson(result))
-  .catch(error => console.log('error', error));
-  }
+.then(response => response.text())
+.then(result => {
+console.log(result);
+props.history.push("/user",result);})
+.catch(error => console.log('error', error));
+}
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -74,7 +82,7 @@ fetch("http://hrishis-todo-list-api.herokuapp.com/user/check", requestOptions)
             required
             fullWidth
             id="username"
-            label="Email Address"
+            label="username"
             name="userName"
             value={userName}
             onChange={(e)=>setUserName(e.target.value)}
