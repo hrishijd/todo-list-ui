@@ -89,6 +89,7 @@ fetch("http://hrishis-todo-list-api.herokuapp.com/user/new", requestOptions)
                 id="firstName"
                 label="First Name"
                 value={firstName}
+                defaultValue="Hey"
                 onChange={(e)=>setFirstName(e.target.value)}
                 autoFocus
               />
