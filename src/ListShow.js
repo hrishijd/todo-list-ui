@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { Button, Container, CssBaseline, Divider, List, ListItem, ListItemIcon, ListItemText, makeStyles, TextField, Typography } from '@material-ui/core';
-import { CenterFocusStrong } from '@material-ui/icons';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -19,6 +16,35 @@ function ListShow(props) {
      var [todo,setTodo]=useState(person.list);
      const [vra,setVra]=useState(false);
      const [login,setlogin]=useState("signin");
+     const  Check= (e) => {
+        startPost(e);
+    };
+    const  startPost= (e) => {
+      e.preventDefault();
+      disp();  
+    };
+    
+    
+    
+    const disp=()=>
+    {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({"list":todo});
+    console.log("hey");
+    var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+    fetch("http://hrishis-todo-list-api.herokuapp.com/user/"+person.id, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+        console.log(result);
+        props.history.push("/user",result);})
+    .catch(error => console.log('error', error));
+    }
     const classes=useStyles();
     const chnge=()=>{
         let rav=todo;
@@ -65,6 +91,17 @@ function ListShow(props) {
                 })}
                 <ListItem button onClick={chnge}>
                 <AddCircleOutlineOutlinedIcon/>
+                </ListItem>
+                <ListItem>
+                <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={Check}
+                >
+            Save
+          </Button>    
                 </ListItem>            
             </List>
             <Button
